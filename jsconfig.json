@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "baseUrl": ".",
+        "paths": {
+            "@/components/*": [
+                "src/components/*"
+            ],
+            "@/containers/*": [
+                "src/containers/*"
+            ],
+            "@/context/*": [
+                "src/context/*"
+            ],
+            "@/hooks/*": [
+                "src/hooks/*"
+            ],
+            "@/common/*": [
+                "src/common/*"
+            ],
+            "@/utils/*": [
+                "src/utils/*"
+            ],
+            "@/mui/*": [
+                "src/mui/*"
+            ],
+        }
+    },
+}
