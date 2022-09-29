@@ -27,9 +27,9 @@ export interface BlogProps {
   createdAt: string;
   title: string;
   coverImage: string;
-  readingTime: string;
   likesCount: string;
   commentsCount: string;
+  readingTime: number;
   category: {
     englishTitle: string;
     title: string;
