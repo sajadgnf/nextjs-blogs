@@ -11,30 +11,12 @@ import React from "react";
 import { BlogProps, Theme } from "src/pages/blogs";
 import { makeStyles } from "@mui/styles";
 import Link from "next/link";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import PostInteractions from "./PostIntractions";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 
 const useStyle = makeStyles((theme: Theme) => {
   return {
     blogImage: {
       objectFit: "cover",
-    },
-
-    blogCategory: {
-      fontFamily: "Roboto",
-      borderRadius: 40,
-      backgroundColor: theme.palette.primary.light,
-      color: theme.palette.primary.main,
-      fontSize: 13,
-      padding: "3px 12px",
-
-      "&:hover": {
-        backgroundColor: theme.palette.primary.main,
-        color: "#fff",
-        cursor: "pointer",
-        transition: "all ease .2s",
-      },
     },
 
     customBox: {
@@ -49,7 +31,7 @@ const useStyle = makeStyles((theme: Theme) => {
   };
 });
 
-const PostList = ({ blogsData }: any) => {
+const SimilarPostsList = ({ blogsData }: any) => {
   const classes = useStyle();
 
   return blogsData.map((post: BlogProps) => (
@@ -59,7 +41,10 @@ const PostList = ({ blogsData }: any) => {
         sx={{
           borderRadius: 10,
           bgcolor: "#fff",
-          border: "1px solid #eeeeee",
+          border: "1px solid #bebebe",
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: { xs: "column", sm: "row" },
         }}
       >
         {/* cover image */}
@@ -68,7 +53,7 @@ const PostList = ({ blogsData }: any) => {
             <CardMedia
               component="img"
               alt="green iguana"
-              height="200"
+              height="150"
               sx={{ objectFit: "contain" }}
               image={post.coverImage}
             />
@@ -83,7 +68,6 @@ const PostList = ({ blogsData }: any) => {
             my: 1.5,
             px: 1.5,
             py: 1.5,
-            minHeight: 180,
             borderRadius: 10,
             display: "flex",
             flexDirection: "column",
@@ -94,10 +78,10 @@ const PostList = ({ blogsData }: any) => {
           <Link href={`/posts/${post.hashId}/${post.slug}`}>
             <a>
               <Typography
-                variant="h6"
-                component="h3"
-                flex={1}
-                mx={1}
+                variant="h3"
+                fontSize={16}
+                fontWeight="bold"
+                mb={2}
                 classes={{ root: classes.customBox }}
               >
                 {post.title}
@@ -105,7 +89,7 @@ const PostList = ({ blogsData }: any) => {
             </a>
           </Link>
 
-          {/* blog authors-category */}
+          {/* blog authors-reading time */}
           <Box
             display="flex"
             justifyContent="space-between"
@@ -116,33 +100,13 @@ const PostList = ({ blogsData }: any) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <Avatar sx={{ width: 25, height: 25 }} />
-              <Typography variant="subtitle2" color="textSecondary" mr={1}>
-                {post.author.name}
-              </Typography>
-            </Box>
-
-            <Link href={`/blogs/${post.category.englishTitle}`}>
-              <a className={classes.blogCategory}>{post.category.title}</a>
-            </Link>
-          </Box>
-
-          {/* blogs interaction */}
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            mt={2}
-          >
-            <PostInteractions post={post} isSmall />
-
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <AccessTimeIcon
-                sx={{ fontSize: "15px", color: "#626262", ml: 0.3 }}
-              />
-              <Typography variant="body2" fontSize="12px" color="textSecondary">
-                زمان مطالعه: {toPersianDigits(post.readingTime)} دقیقه
-              </Typography>
+              <Avatar sx={{ width: 35, height: 35 }} />
+              <Box mr={1}>
+                <Typography fontSize="12px">{post.author.name}</Typography>
+                <Typography fontSize="12px" color="textSecondary">
+                  زمان مطالعه: {toPersianDigits(post.readingTime)} دقیقه
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </CardContent>
@@ -151,4 +115,4 @@ const PostList = ({ blogsData }: any) => {
   ));
 };
 
-export default PostList;
+export default SimilarPostsList;

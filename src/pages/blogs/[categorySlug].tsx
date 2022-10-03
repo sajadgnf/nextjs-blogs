@@ -10,7 +10,7 @@ import queryString from "query-string";
 export interface Theme {
   palette: {
     customPurple: string;
-    customBlue: {
+    primary: {
       light: string;
       main: string;
     };
@@ -91,7 +91,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      blogsData: result.data,
+      blogsData: result.data.docs,
       postCategories: postCategories.data,
     },
   };

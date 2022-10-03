@@ -53,7 +53,7 @@ const Categories = ({ postCategories }: any) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <>
+    <Box>
       {/* accordion header */}
       <Box
         className={classes.sidebarHead}
@@ -89,9 +89,7 @@ const Categories = ({ postCategories }: any) => {
         sx={isOpen ? { display: "flex" } : { display: "none" }}
       >
         <Link href={"/blogs"}>
-          <a className={classes.sideBarLink}>
-            همه پست ها
-          </a>
+          <a className={classes.sideBarLink}>همه پست ها</a>
         </Link>
         {postCategories.map((category: BlogProps["category"]) => (
           <Link href={`/blogs/${category.englishTitle}`} key={category._id}>
@@ -99,7 +97,7 @@ const Categories = ({ postCategories }: any) => {
           </Link>
         ))}
       </Box>
-    </>
+    </Box>
   );
 };
 

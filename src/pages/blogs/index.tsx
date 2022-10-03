@@ -8,13 +8,17 @@ import Sortbar from "@/components/posts/Sortbar";
 export interface Theme {
   palette: {
     customPurple: string;
-    customBlue: {
+    primary: {
       light: string;
       main: string;
     };
     customRed: {
       light: string;
       main: string;
+    };
+    customGray: {
+      light: "#8b8b8b";
+      main: "#454545";
     };
   };
   breakpoints: any;
@@ -24,17 +28,23 @@ export interface BlogProps {
   _id: string;
   slug: string;
   hashId: string;
-  createdAt: string;
+  createdAt: Date;
   title: string;
   coverImage: string;
-  likesCount: string;
-  commentsCount: string;
+  text: string;
   readingTime: number;
+  likesCount: number;
+  commentsCount: number;
+  isLiked: Boolean;
+  isBookMarked: Boolean;
+  related: object;
+
   category: {
     englishTitle: string;
     title: string;
     _id: string;
   };
+
   author: {
     name: string;
     biography: string;
@@ -91,7 +101,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      blogsData: result.data,
+      blogsData: result.data.docs,
       postCategories: postCategories.data,
     },
   };

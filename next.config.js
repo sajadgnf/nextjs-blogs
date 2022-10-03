@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  env: {
+    DOMAIN_URL: process.env.DOMAIN_URL,
+  },
 };
 
 module.exports = nextConfig
