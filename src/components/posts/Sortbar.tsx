@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
+import { RiListUnordered } from "react-icons/ri";
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@mui/styles";
 import { Theme } from "src/pages/blogs";
@@ -81,7 +82,7 @@ const Sortbar = () => {
   return (
     <>
       <Box className={classes.filterTitle} onClick={() => setIsOpen(!isOpen)}>
-        <TuneOutlinedIcon sx={{ color: "#4e4e4e" }} />
+        <RiListUnordered style={{ color: "#666666", fontSize: 20 }} />
         <Typography color="textSecondary" mr={1}>
           مرتب سازی<span>:</span>
         </Typography>
