@@ -1,11 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import { BsBookmark } from "react-icons/Bs";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import {
+  BsChatSquareText,
+  BsBookmark,
+  BsFillBookmarkFill,
+  BsHeart,
+  BsHeartFill,
+} from "react-icons/bs";
 import { BlogProps } from "src/pages/blogs";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 
@@ -16,25 +17,13 @@ type InteractionProps = {
 
 const PostInteractions = ({ post, isSmall }: InteractionProps) => {
   const bookmarkIconSize = () =>
-    isSmall
-      ? { fontSize: 18 }
-      : {
-          fontSize: 28,
-          transition: "all ease .2s",
-          "&:hover": { color: "primary.main" },
-        };
+    isSmall ? { fontSize: 14 } : { fontSize: 18 };
 
-  const likeIconSize = () =>
-    isSmall
-      ? { fontSize: 15 }
-      : {
-          fontSize: 24,
-          transition: "all ease .2s",
-          "&:hover": { color: "customRed.main" },
-        };
+  const customIconSize = () => (isSmall ? { fontSize: 14 } : { fontSize: 16 });
 
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center">
+      {/* comments */}
       <Box
         ml={1}
         display="flex"
@@ -44,14 +33,15 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
         px={0.5}
         borderRadius={1.2}
         bgcolor={isSmall ? "#e5e7eb" : "transparent"}
-        color={isSmall ? "customGray.main" : "customGray.light"}
+        color={isSmall ? "customGray.main" : "customGray.dark"}
       >
-        <ChatOutlinedIcon sx={{ ml: 0.3, fontSize: isSmall ? 16 : 24 }} />
-        <Typography fontSize={isSmall ? 11 : 18}>
+        <BsChatSquareText style={customIconSize()} />
+        <Typography fontSize={isSmall ? 11 : 16} mr={0.5}>
           {toPersianDigits(post.commentsCount)}
         </Typography>
       </Box>
 
+      {/* like */}
       <Box
         sx={[
           {
@@ -76,20 +66,22 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
               }
             : {
                 backgroundColor: "transparent",
-                color: "customGray.light",
+                color: "customGray.dark",
+                "&:hover": { color: "customRed.main" },
               },
         ]}
       >
         {post.isLiked ? (
-          <FavoriteIcon sx={[{ ml: 0.2 }, likeIconSize()]} />
+          <BsHeartFill className="fillHeartIcon" style={customIconSize()} />
         ) : (
-          <FavoriteBorderIcon sx={[{ ml: 0.2 }, likeIconSize()]} />
+          <BsHeart style={customIconSize()} />
         )}
-        <Typography fontSize={isSmall ? 12 : 16}>
+        <Typography fontSize={isSmall ? 12 : 16} mr={0.5}>
           {toPersianDigits(post.likesCount)}
         </Typography>
       </Box>
 
+      {/* bookmark */}
       <Box
         sx={[
           {
@@ -97,7 +89,7 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
             borderRadius: 1.2,
             transition: "all ease .2s",
             display: "flex",
-            p: 0.3,
+            p: 0.5,
             justifyContent: "center",
             alignItems: "center",
           },
@@ -113,14 +105,18 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
               }
             : {
                 backgroundColor: "transparent",
-                color: "customGray.light",
+                color: "customGray.dark",
+                "&:hover": { color: "primary.main" },
               },
         ]}
       >
         {post.isBookMarked ? (
-          <BookmarkIcon sx={bookmarkIconSize()} />
+          <BsFillBookmarkFill
+            className="fillBookmarkIcon"
+            style={bookmarkIconSize()}
+          />
         ) : (
-          <BookmarkBorderIcon sx={bookmarkIconSize()} />
+          <BsBookmark style={bookmarkIconSize()} />
         )}
       </Box>
     </Box>

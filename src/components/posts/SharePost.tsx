@@ -15,11 +15,11 @@ const useStyle = makeStyles((theme: Theme) => {
       margin: "0 12px",
     },
     customizedIcon: {
-      color: theme.palette.customGray.light,
+      color: theme.palette.customGray.main,
       cursor: "pointer",
       transition: "all ease .2s",
       fontSize: 28,
-      "&:hover": { color: theme.palette.customGray.main },
+      "&:hover": { color: theme.palette.customGray.dark },
     },
   };
 });
@@ -70,7 +70,7 @@ const SharePost = ({ post }: { post: BlogProps }) => {
           justifyContent="center"
           alignItems="center"
           border="1px solid"
-          borderColor="customGray.light"
+          borderColor="customGray.main"
           borderRadius={10}
           color="text.secondary"
           py={0.8}
