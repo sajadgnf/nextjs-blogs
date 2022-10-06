@@ -5,8 +5,6 @@ import { PaletteOptions } from "@mui/material/styles/createPalette";
 
 declare module "@mui/material/styles/createPalette" {
   export interface PaletteOptions {
-    customPurple: string,
-
     customRed: {
       light: string,
       main: string
@@ -55,9 +53,9 @@ const theme = createTheme({
   },
   direction: "rtl",
   palette: {
-
     secondary: {
-      main: "#19857b",
+      light: "#f2e8ff",
+      main: '#733dd8',
     },
     error: {
       main: red.A400,
@@ -66,8 +64,6 @@ const theme = createTheme({
       light: '#dbeafe',
       main: "#3c6ef7",
     },
-
-    customPurple: '#733dd8',
 
     customRed: {
       light: "#fee2e2",

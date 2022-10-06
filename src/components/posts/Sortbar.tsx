@@ -21,7 +21,7 @@ const useStyle = makeStyles((theme: Theme) => {
       padding: "16px 0",
       transition: "all ease .2s",
       "&:hover": {
-        borderBottom: `3px solid ${theme.palette.customPurple}`,
+        borderBottom: `3px solid ${theme.palette.secondary.main}`,
       },
     },
 
@@ -61,11 +61,11 @@ const useStyle = makeStyles((theme: Theme) => {
       borderRadius: 5,
 
       "&:focus": {
-        borderRight: `5px solid ${theme.palette.customPurple}`,
+        borderRight: `5px solid ${theme.palette.secondary.main}`,
       },
 
       "&:focus p": {
-        color: theme.palette.customPurple,
+        color: theme.palette.secondary.main,
       },
 
       "& p": {

@@ -7,38 +7,6 @@ import Sortbar from "@/components/posts/Sortbar";
 import { GetServerSideProps } from "next";
 import queryString from "query-string";
 
-export interface Theme {
-  palette: {
-    customPurple: string;
-    primary: {
-      light: string;
-      main: string;
-    };
-    customRed: {
-      light: string;
-      main: string;
-    };
-  };
-  breakpoints: any;
-}
-
-export interface BlogProps {
-  _id: string;
-  title: string;
-  coverImage: string;
-  readingTime: string;
-  likesCount: string;
-  commentsCount: string;
-  category: {
-    englishTitle: string;
-    title: string;
-    _id: string;
-  };
-  author: {
-    name: string;
-  };
-}
-
 function CategoryPage({ blogsData, postCategories }: any) {
   return (
     <Container maxWidth="lg">

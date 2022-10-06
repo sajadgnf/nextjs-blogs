@@ -1,6 +1,5 @@
 import axios from "axios";
 import { GetServerSideProps } from "next";
-import { BlogProps, Theme } from "src/pages/blogs";
 import queryString from "query-string";
 import React, { useState } from "react";
 import Container from "@mui/material/Container";
@@ -9,17 +8,14 @@ import { Avatar, Divider, Grid, Typography } from "@mui/material";
 import BookmarkAddRoundedIcon from "@mui/icons-material/BookmarkAddRounded";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
-
 import { makeStyles } from "@mui/styles";
 import { RiAttachmentLine } from "react-icons/ri";
-
+import { BlogProps, Theme } from "src/pages/blogs";
 import SimilarPostsList from "@/components/posts/SimilarPostsList";
-
-// utils
-import { toPersianDigits } from "@/utils/toPersianDigits";
 import PostInteractions from "@/components/posts/PostIntractions";
 import PostComments from "@/components/posts/postComponents";
 import SharePost from "@/components/posts/SharePost";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 import toLocalDate from "@/utils/toLocalDate";
 
 const useStyle = makeStyles((theme: Theme) => {
@@ -61,6 +57,15 @@ const useStyle = makeStyles((theme: Theme) => {
       transition: "all ease .2s",
       "&:hover": {
         backgroundColor: "#dbdbdb",
+      },
+    },
+    mainContent: {
+      "& h3": {
+        marginTop: 45,
+      },
+      "& p": {
+        lineHeight: 2,
+        fontSize: 18,
       },
     },
   };
@@ -145,6 +150,7 @@ const PostPage = ({ post }: { post: BlogProps }) => {
 
           {/* blog content */}
           <div
+            className={classes.mainContent}
             dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.text) }}
           ></div>
 
@@ -190,11 +196,12 @@ const PostPage = ({ post }: { post: BlogProps }) => {
           item
           xs={0}
           md={4}
+          mt={60}
           display={{ xs: "none", md: "grid" }}
           position="relative"
-          alignItems="center"
+          alignItems="start"
         >
-          <Box position="sticky" m="0 auto 10rem" top={350} width={160}>
+          <Box position="sticky" m="0 auto 15rem" top={350} width={160}>
             <Typography fontWeight="bold" mb={1}>
               {post.author.name}
             </Typography>

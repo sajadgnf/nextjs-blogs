@@ -7,7 +7,10 @@ import Sortbar from "@/components/posts/Sortbar";
 
 export interface Theme {
   palette: {
-    customPurple: string;
+    secondary: {
+      light: string;
+      main: string;
+    };
     primary: {
       light: string;
       main: string;
@@ -38,6 +41,7 @@ export interface BlogProps {
   isLiked: Boolean;
   isBookMarked: Boolean;
   related: object;
+  comments: any;
 
   category: {
     englishTitle: string;
