@@ -3,10 +3,11 @@ import { BlogProps } from "src/pages/blogs";
 import { Typography, Grid } from "@mui/material";
 import SingleComment from "./SingleComment";
 import CommentForm from "./CommentForm";
+import ReplyComment from "./ReplyComment";
 
 export interface CommentProps {
   _id: number;
-  responseTo: boolean;
+  responseTo: number;
   status: number;
   writer: { name: string };
   createdAt: Date;
@@ -30,6 +31,10 @@ const PostComments = ({ post }: { post: BlogProps }) => {
             comment.status === 2 && (
               <Grid item xs={12} key={comment._id}>
                 <SingleComment comment={comment} />
+                <ReplyComment
+                  comments={post.comments}
+                  parentsCommentId={comment._id}
+                />
               </Grid>
             )
         )}
