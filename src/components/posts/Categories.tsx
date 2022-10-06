@@ -22,19 +22,21 @@ const useStyle = makeStyles((theme: Theme) => {
       whiteSpace: "nowrap",
 
       "&:focus": {
-        backgroundColor: "#f2e8ffb0",
-        color: theme.palette.customPurple,
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.secondary.main,
       },
 
       [theme.breakpoints.up("md")]: {
         border: 0,
         borderRadius: 0,
         marginLeft: 0,
+
         "&:hover": {
-          backgroundColor: "#f2e8ffb0",
+          backgroundColor: theme.palette.secondary.light,
         },
+
         "&:focus": {
-          backgroundColor: theme.palette.customPurple,
+          backgroundColor: theme.palette.secondary.main,
           color: "#fff",
         },
       },
@@ -60,7 +62,7 @@ const Categories = ({ postCategories }: any) => {
         display={{ xs: "none", md: "flex" }}
         alignItems="center"
         justifyContent="space-between"
-        bgcolor="#f2e8ff"
+        bgcolor="secondary.light"
         px={3}
         py={2.5}
         onClick={() => setIsOpen(!isOpen)}

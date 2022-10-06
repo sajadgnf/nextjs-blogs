@@ -1,9 +1,19 @@
 import React, { useState } from "react";
 import { BlogProps } from "src/pages/blogs";
-import { Typography, TextField, Button } from "@mui/material";
+import { Typography, TextField, Button, Grid } from "@mui/material";
 import { styled } from "@mui/styles";
+import SingleComment from "./SingleComment";
 
-const CustomTextField = styled(TextField)({
+export interface CommentProps {
+  _id: number;
+  responseTo: boolean;
+  status: number;
+  writer: { name: string };
+  createdAt: Date;
+  content: string;
+}
+
+export const CustomTextField = styled(TextField)({
   backgroundColor: "#fff",
   "& label": {
     transformOrigin: "right !important",
@@ -46,9 +56,22 @@ const PostComments = ({ post }: { post: BlogProps }) => {
         نظرات
       </Typography>
 
+      {/* comments */}
+      <Grid container spacing={3}>
+        {post.comments.map(
+          (comment: CommentProps) =>
+            !comment.responseTo &&
+            comment.status === 2 && (
+              <Grid item xs={12} key={comment._id}>
+                <SingleComment comment={comment} />
+              </Grid>
+            )
+        )}
+      </Grid>
+
       {/* base comment form */}
       <form>
-        <Typography mb={2}>ارسال دیدگاه جدید</Typography>
+        <Typography mb={2} mt={4}>ارسال دیدگاه جدید</Typography>
         <CustomTextField
           variant="outlined"
           placeholder="متن کامنت..."
