@@ -12,6 +12,7 @@ declare module "@mui/material/styles/createPalette" {
     customGray: {
       light: string,
       main: string,
+      dark: string
     }
   }
 };
@@ -71,7 +72,8 @@ const theme = createTheme({
     },
     customGray: {
       light: '#ababab',
-      main: "#454545",
+      main: "#727272",
+      dark: "#454545",
     }
 
   },

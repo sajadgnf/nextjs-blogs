@@ -38,11 +38,11 @@ const useStyle = makeStyles((theme: Theme) => {
     },
 
     customizedIcon: {
-      color: theme.palette.customGray.light,
+      color: theme.palette.customGray.main,
       cursor: "pointer",
       transition: "all ease .2s",
       fontSize: 28,
-      "&:hover": { color: theme.palette.customGray.main },
+      "&:hover": { color: theme.palette.customGray.dark },
     },
 
     linkBtns: {
@@ -59,6 +59,7 @@ const useStyle = makeStyles((theme: Theme) => {
         backgroundColor: "#dbdbdb",
       },
     },
+    
     mainContent: {
       "& h3": {
         marginTop: 45,
@@ -137,9 +138,9 @@ const PostPage = ({ post }: { post: BlogProps }) => {
                 mr={2}
                 sx={{
                   cursor: "pointer",
-                  color: "customGray.light",
+                  color: "customGray.main",
                   transition: "all ease .2s",
-                  "&:hover": { color: "customGray.main" },
+                  "&:hover": { color: "customGray.dark" },
                 }}
               >
                 <Typography fontSize={13}>ذخیره</Typography>

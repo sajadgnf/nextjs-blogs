@@ -20,8 +20,9 @@ export interface Theme {
       main: string;
     };
     customGray: {
-      light: "#8b8b8b";
-      main: "#454545";
+      light: string;
+      main: string;
+      dark: string;
     };
   };
   breakpoints: any;

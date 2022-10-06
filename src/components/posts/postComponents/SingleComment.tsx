@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Box, Avatar, Typography, Button } from "@mui/material";
-import { CommentProps, CustomTextField } from "./index";
+import { CommentProps } from "./index";
 import toLocalDate from "@/utils/toLocalDate";
+import CommentForm from "./CommentForm";
 
 const SingleComment = ({ comment }: { comment: CommentProps }) => {
   const [replyTo, setReplyTo] = useState(false);
@@ -36,25 +37,10 @@ const SingleComment = ({ comment }: { comment: CommentProps }) => {
           <Typography fontSize={12} mb={2}>
             در حال پاسخ به {writer.name}
           </Typography>
-          <CustomTextField
-            variant="outlined"
-            placeholder="متن کامنت..."
-            value={commentValue}
-            name="text"
-            onChange={(e) => setCommentValue(e.target.value)}
-            //   onFocus={(e) => focusHandler(e)}
-            fullWidth
-            multiline
-            minRows={2}
+          <CommentForm
+            commentValue={commentValue}
+            setCommentValue={setCommentValue}
           />
-
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 2, width: 200, height: 50, borderRadius: 2 }}
-          >
-            ارسال نظر
-          </Button>
         </form>
       )}
     </Box>
