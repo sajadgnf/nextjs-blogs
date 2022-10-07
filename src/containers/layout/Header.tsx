@@ -1,20 +1,35 @@
-import { AppBar, Box, Stack, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/system";
 import Link from "next/link";
 import React from "react";
 
-const Heade = () => {
+const useStyle = makeStyles({
+  link: {
+    marginLeft: 26,
+  },
+});
+
+const Header = () => {
+  const classes = useStyle();
+
   return (
     <AppBar
-      elevation={1}
-      sx={{ mb: 8, position: "static", bgcolor: "#fff", color: "#333" }}
+      elevation={0}
+      sx={{
+        mb: 8,
+        position: "static",
+        bgcolor: "#fff",
+        color: "#333",
+        boxShadow: "rgb(0 0 0 / 10%) 0px 2px 5px",
+      }}
     >
       <Container maxWidth="lg">
         <Toolbar>
           <Box display="flex" alignItems="center" flexGrow={1}>
-            <Link href={"/"}>
-              <a>
-                <Typography ml={3}>Blogs</Typography>
+            <Link href={"/blogs"}>
+              <a className={classes.link}>
+                <Typography>Blogs</Typography>
               </a>
             </Link>
 
@@ -27,14 +42,14 @@ const Heade = () => {
 
           <Box display="flex" alignItems="center">
             <Link href={"/"}>
-              <a>
-                <Typography ml={3} mt={.5}>Profile</Typography>
+              <a className={classes.link}>
+                <Typography mt={0.5}>Profile</Typography>
               </a>
             </Link>
 
             <Link href={"/"}>
-              <a>
-                <Typography ml={3}>ورود</Typography>
+              <a className={classes.link}>
+                <Typography>ورود</Typography>
               </a>
             </Link>
 
@@ -50,4 +65,4 @@ const Heade = () => {
   );
 };
 
-export default Heade;
+export default Header;

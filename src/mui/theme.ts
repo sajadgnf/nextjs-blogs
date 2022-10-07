@@ -32,13 +32,20 @@ declare module '@mui/material/styles' {
   }
 }
 
-// Update the Typography's variant prop options
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     fontWeightThin: true;
     fontWeightExtraBold: true;
     fontWeightBlack: true;
   }
+}
+
+declare module '@mui/material/styles/shadows' {
+  interface ShadowsPropsVariantOverrides {
+    0: string;
+    1: string;
+  }
+
 }
 
 // Create a theme instance.
@@ -91,10 +98,6 @@ const theme = createTheme({
     fontWeightBlack: 900,
   },
 
-  shadows: {
-    0: 'none',
-    1: "rgb(0 0 0 / 10%) 0px 2px 5px"
-  }
 });
 
 export default theme;

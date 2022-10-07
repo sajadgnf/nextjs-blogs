@@ -4,6 +4,7 @@ import axios from "axios";
 import PostList from "@/components/posts/PostList";
 import Categories from "@/components/posts/Categories";
 import Sortbar from "@/components/posts/Sortbar";
+import Layout from "@/containers/layout";
 
 export interface Theme {
   palette: {
@@ -58,39 +59,41 @@ export interface BlogProps {
 
 function Blogs({ blogsData, postCategories }: any) {
   return (
-    <Container maxWidth="lg">
-      <Grid container mt={15}>
-        {/* category section */}
-        <Grid
-          item
-          xs={12}
-          md={2.5}
-          overflow="hidden"
-          borderRadius={6}
-          height="fit-content"
-        >
-          <Categories postCategories={postCategories} />
-        </Grid>
-
-        <Grid item xs={12} md={8.5} mr={{ xs: 0, md: 4 }}>
-          {/* sortbar */}
-          <Box
-            display="flex"
-            bgcolor={{ xs: "transparent", md: "#fff" }}
+    <Layout>
+      <Container maxWidth="lg">
+        <Grid container mb={5}>
+          {/* category section */}
+          <Grid
+            item
+            xs={12}
+            md={2.5}
+            overflow="hidden"
             borderRadius={6}
-            mb={6}
-            px={{ xs: 0, md: 2 }}
+            height="fit-content"
           >
-            <Sortbar />
-          </Box>
+            <Categories postCategories={postCategories} />
+          </Grid>
 
-          {/* blogs section */}
-          <Grid container spacing={3}>
-            <PostList blogsData={blogsData} />
+          <Grid item xs={12} md={8.5} mr={{ xs: 0, md: 4 }}>
+            {/* sortbar */}
+            <Box
+              display="flex"
+              bgcolor={{ xs: "transparent", md: "#fff" }}
+              borderRadius={6}
+              mb={6}
+              px={{ xs: 0, md: 2 }}
+            >
+              <Sortbar />
+            </Box>
+
+            {/* blogs section */}
+            <Grid container spacing={3}>
+              <PostList blogsData={blogsData} />
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </Layout>
   );
 }
 

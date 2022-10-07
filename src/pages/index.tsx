@@ -1,10 +1,11 @@
 import Layout from "@/containers/layout";
+import { Container } from "@mui/material";
 import React from "react";
 
 const Home = () => {
   return (
     <Layout>
-      <div>this is home page</div>
+      <Container maxWidth="lg">this is home page</Container>
     </Layout>
   );
 };

@@ -77,13 +77,13 @@ const PostPage = ({ post }: { post: BlogProps }) => {
   const classes = useStyle();
 
   return (
-    <Container maxWidth="lg">
-      <Layout>
+    <Layout>
+      <Container maxWidth="lg">
         <Grid container px={{ xs: 2, md: 0 }}>
           <Grid item xs={12} md={8}>
             {/* author */}
             <Box
-              my={5}
+              mb={5}
               display="flex"
               flexDirection={{ xs: "column", md: "row" }}
               justifyContent="space-between"
@@ -269,12 +269,12 @@ const PostPage = ({ post }: { post: BlogProps }) => {
           </Grid>
 
           {/* comments */}
-          <Grid item xs={12}>
+          <Grid item xs={12} mb={5}>
             <PostComments post={post} />
           </Grid>
         </Grid>
-      </Layout>
-    </Container>
+      </Container>
+    </Layout>
   );
 };
 
