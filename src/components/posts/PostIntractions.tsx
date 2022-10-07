@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import {
   BsChatSquareText,
@@ -22,42 +22,49 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
   const customIconSize = () => (isSmall ? { fontSize: 14 } : { fontSize: 16 });
 
   return (
-    <Box display="flex" justifyContent="space-between" alignItems="center">
+    <Stack direction="row" alignItems="center">
       {/* comments */}
-      <Box
-        ml={1}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        py={0.3}
-        px={0.5}
-        borderRadius={1.2}
-        bgcolor={isSmall ? "#e5e7eb" : "transparent"}
-        color={isSmall ? "customGray.main" : "customGray.dark"}
-      >
-        <BsChatSquareText style={customIconSize()} />
-        <Typography fontSize={isSmall ? 11 : 16} mr={0.5}>
-          {toPersianDigits(post.commentsCount)}
-        </Typography>
-      </Box>
-
-      {/* like */}
-      <Box
+      <Button
         sx={[
           {
+            p: 0.3,
             ml: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            transition: "all ease .2s",
-            cursor: "pointer",
+            minWidth: "unset",
+            borderRadius: 1.2,
           },
           isSmall
             ? {
-                backgroundColor: "customRed.light",
+                color: "customGray.main",
+                bgcolor: "#e5e7eb",
+                "&:hover": { bgcolor: "#e5e7eb" },
+              }
+            : {
+                color: "customGray.dark",
+                bgcolor: "transparent",
+                "&:hover": { bgcolor: "transparent" },
+              },
+        ]}
+      >
+        <BsChatSquareText style={customIconSize()} />
+        <Typography fontSize={isSmall ? 11 : 16} mr={0.8}>
+          {toPersianDigits(post.commentsCount)}
+        </Typography>
+      </Button>
+
+      {/* like */}
+      <Button
+        sx={[
+          {
+            py: 0.2,
+            px: 0.3,
+            ml: 1,
+            minWidth: "unset",
+            borderRadius: 1.2,
+          },
+          isSmall
+            ? {
+                bgcolor: "customRed.light",
                 color: "customRed.main",
-                py: 0.2,
-                px: 0.3,
                 borderRadius: 1.2,
                 "&:hover": {
                   bgcolor: "customRed.main",
@@ -65,9 +72,9 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
                 },
               }
             : {
-                backgroundColor: "transparent",
+                bgcolor: "transparent",
                 color: "customGray.dark",
-                "&:hover": { color: "customRed.main" },
+                "&:hover": { color: "customRed.main", bgcolor: "transparent" },
               },
         ]}
       >
@@ -79,23 +86,19 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
         <Typography fontSize={isSmall ? 12 : 16} mr={0.5}>
           {toPersianDigits(post.likesCount)}
         </Typography>
-      </Box>
+      </Button>
 
       {/* bookmark */}
-      <Box
+      <Button
         sx={[
           {
-            cursor: "pointer",
+            px: 0.6,
+            minWidth: "unset",
             borderRadius: 1.2,
-            transition: "all ease .2s",
-            display: "flex",
-            p: 0.5,
-            justifyContent: "center",
-            alignItems: "center",
           },
           isSmall
             ? {
-                backgroundColor: "primary.light",
+                bgcolor: "primary.light",
                 color: "primary.main",
 
                 "&:hover": {
@@ -104,9 +107,9 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
                 },
               }
             : {
-                backgroundColor: "transparent",
+                bgcolor: "transparent",
                 color: "customGray.dark",
-                "&:hover": { color: "primary.main" },
+                "&:hover": { color: "primary.main", bgcolor: "transparent" },
               },
         ]}
       >
@@ -118,8 +121,8 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
         ) : (
           <BsBookmark style={bookmarkIconSize()} />
         )}
-      </Box>
-    </Box>
+      </Button>
+    </Stack>
   );
 };
 
