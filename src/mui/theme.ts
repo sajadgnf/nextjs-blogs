@@ -52,7 +52,9 @@ const theme = createTheme({
       xl: 1536
     }
   },
+
   direction: "rtl",
+
   palette: {
     secondary: {
       light: "#f2e8ff",
@@ -77,6 +79,7 @@ const theme = createTheme({
     }
 
   },
+
   typography: {
     fontFamily: "vazir,Roboto",
     fontWeightThin: 100,
@@ -86,6 +89,11 @@ const theme = createTheme({
     fontWeightBold: 700,
     fontWeightExtraBold: 800,
     fontWeightBlack: 900,
+  },
+
+  shadows: {
+    0: 'none',
+    1: "rgb(0 0 0 / 10%) 0px 2px 5px"
   }
 });
 
