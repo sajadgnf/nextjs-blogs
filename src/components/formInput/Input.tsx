@@ -1,12 +1,13 @@
 import { styled } from "@mui/styles";
-import { TextField } from "@mui/material";
-import React from "react";
+import { TextField, Typography } from "@mui/material";
+import React, { ChangeEventHandler, FocusEventHandler } from "react";
+import { ValuesProps } from "src/pages/signup";
 
 type InputProps = {
   name: string;
   label: string;
   type?: string;
-  formik: object;
+  formik: any;
 };
 
 export const CustomTextField = styled(TextField)({
@@ -46,14 +47,22 @@ export const CustomTextField = styled(TextField)({
 const Input = ({ name, label, formik, type = "text" }: InputProps) => {
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} style={{ marginTop: 20, display: "block" }}>
+        {label}
+      </label>
       <CustomTextField
         type={type}
+        {...formik.getFieldProps(name)}
         id={name}
         name={name}
         fullWidth
-        sx={{ mt: 1, mb: 2, "& input": { px: 2, py: 1 } }}
+        sx={{ mt: 1, "& input": { px: 2, py: 1 } }}
       />
+      {formik.errors[name] && formik.touched[name] && (
+        <Typography color="error" fontSize={14}>
+          {formik.errors[name]}
+        </Typography>
+      )}
     </>
   );
 };

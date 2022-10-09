@@ -65,7 +65,7 @@ const RegisterForm = () => {
   return (
     <Layout>
       <Head>
-        <title>Signup</title>
+        <title>Signin</title>
       </Head>
 
       <Box display="flex" flexDirection="column" alignItems="center" mb={5}>
@@ -81,18 +81,10 @@ const RegisterForm = () => {
           </Typography>
 
           <form>
-            <Input label="نام و نام خانوادگی" name="name" formik={formik} />
             <Input label="ایمیل" name="email" type="email" formik={formik} />
-            <Input label="شماره موبایل" name="phoneNumber" formik={formik} />
             <Input
               label="رمز عبور"
               name="password"
-              type="password"
-              formik={formik}
-            />
-            <Input
-              label="تکرار رمز"
-              name="confirmPassword"
               type="password"
               formik={formik}
             />
