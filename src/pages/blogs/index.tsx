@@ -61,7 +61,7 @@ function Blogs({ blogsData, postCategories }: any) {
   return (
     <Layout>
       <Container maxWidth="lg">
-        <Grid container mb={5}>
+        <Grid container pb={10}>
           {/* category section */}
           <Grid
             item

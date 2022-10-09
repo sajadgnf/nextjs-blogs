@@ -5,7 +5,7 @@ import React from "react";
 const Footer = () => {
   return (
     <Box
-      position="relative"
+      position="absolute"
       bottom="0"
       textAlign="center"
       width="100%"

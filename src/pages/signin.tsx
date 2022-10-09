@@ -68,7 +68,7 @@ const RegisterForm = () => {
         <title>Signin</title>
       </Head>
 
-      <Box display="flex" flexDirection="column" alignItems="center" mb={5}>
+      <Box display="flex" flexDirection="column" alignItems="center" pb={10}>
         <Box width={500}>
           <Typography
             mb={5}

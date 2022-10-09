@@ -269,7 +269,7 @@ const PostPage = ({ post }: { post: BlogProps }) => {
           </Grid>
 
           {/* comments */}
-          <Grid item xs={12} mb={5}>
+          <Grid item xs={12} pb={10}>
             <PostComments post={post} />
           </Grid>
         </Grid>

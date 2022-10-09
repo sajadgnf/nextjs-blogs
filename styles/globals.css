@@ -8,6 +8,7 @@ body {
   font-family: "vazir";
   background-color: #fbfbfb;
   min-height: 100vh;
+  position: relative;
 }
 
 a {
