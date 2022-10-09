@@ -5,15 +5,17 @@ import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import Head from "next/head";
 import * as Yup from "yup";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export type ValuesProps = {
-  name: string;
+  name?: string;
   email: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
+  recaptcha: string;
 };
 
 let initialValues = {
@@ -22,6 +24,7 @@ let initialValues = {
   phoneNumber: "",
   password: "",
   confirmPassword: "",
+  recaptcha: "",
 };
 
 const RegisterForm = () => {
@@ -36,7 +39,7 @@ const RegisterForm = () => {
   const validationSchema = Yup.object({
     name: Yup.string()
       .required("Name is required")
-      .min(6, "Name length is not valid"),
+      .min(3, "Name length is not valid"),
     email: Yup.string()
       .email("Invalid Email format")
       .required("Email is required"),
@@ -47,12 +50,13 @@ const RegisterForm = () => {
     password: Yup.string()
       .required("Password is required")
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
       ),
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    recaptcha: Yup.string().required(),
   });
 
   const formik = useFormik({
@@ -96,6 +100,11 @@ const RegisterForm = () => {
               name="confirmPassword"
               type="password"
               formik={formik}
+            />
+
+            <ReCAPTCHA
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={formik.handleChange("recaptcha")}
             />
 
             <Box mt={3}>

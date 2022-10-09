@@ -7,21 +7,13 @@ import Head from "next/head";
 import * as Yup from "yup";
 import React from "react";
 import Link from "next/link";
-
-export type ValuesProps = {
-  name: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  confirmPassword: string;
-};
+import { ValuesProps } from "./signup";
+import ReCAPTCHA from "react-google-recaptcha";
 
 let initialValues = {
-  name: "",
   email: "",
-  phoneNumber: "",
   password: "",
-  confirmPassword: "",
+  recaptcha: "",
 };
 
 const RegisterForm = () => {
@@ -47,12 +39,13 @@ const RegisterForm = () => {
     password: Yup.string()
       .required("Password is required")
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
       ),
     confirmPassword: Yup.string()
       .required("Confirm Password is required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    recaptcha: Yup.string().required(),
   });
 
   const formik = useFormik({
@@ -88,6 +81,11 @@ const RegisterForm = () => {
               name="password"
               type="password"
               formik={formik}
+            />
+
+            <ReCAPTCHA
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={formik.handleChange("recaptcha")}
             />
 
             <Box mt={3}>
