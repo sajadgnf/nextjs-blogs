@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import Head from "next/head";
 import * as Yup from "yup";
 import React from "react";
+import Link from "next/link";
 
 export type ValuesProps = {
   name: string;
@@ -88,6 +89,17 @@ const RegisterForm = () => {
               type="password"
               formik={formik}
             />
+
+            <Box mt={3}>
+              <Link href={"/signup"}>
+                <a>
+                  هنوز ثبت نام نکردی؟
+                  <Typography color="primary" display="inline">
+                    &nbsp;ثبت نام
+                  </Typography>
+                </a>
+              </Link>
+            </Box>
 
             <Button
               variant="contained"

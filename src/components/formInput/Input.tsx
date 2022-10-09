@@ -2,6 +2,7 @@ import { styled } from "@mui/styles";
 import { TextField, Typography } from "@mui/material";
 import React, { ChangeEventHandler, FocusEventHandler } from "react";
 import { ValuesProps } from "src/pages/signup";
+import { Box } from "@mui/system";
 
 type InputProps = {
   name: string;
@@ -46,10 +47,8 @@ export const CustomTextField = styled(TextField)({
 
 const Input = ({ name, label, formik, type = "text" }: InputProps) => {
   return (
-    <>
-      <label htmlFor={name} style={{ marginTop: 20, display: "block" }}>
-        {label}
-      </label>
+    <Box mb={2}>
+      <label htmlFor={name}>{label}</label>
       <CustomTextField
         type={type}
         {...formik.getFieldProps(name)}
@@ -63,7 +62,7 @@ const Input = ({ name, label, formik, type = "text" }: InputProps) => {
           {formik.errors[name]}
         </Typography>
       )}
-    </>
+    </Box>
   );
 };
 
