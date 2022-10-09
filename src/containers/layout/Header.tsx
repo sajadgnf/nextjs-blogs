@@ -53,7 +53,7 @@ const Header = () => {
               </a>
             </Link>
 
-            <Link href={"/"}>
+            <Link href={"/signup"}>
               <a>
                 <Typography>ثبت نام</Typography>
               </a>

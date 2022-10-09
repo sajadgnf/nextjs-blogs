@@ -50,7 +50,6 @@ const CommentForm = ({ commentValue, setCommentValue }: CommentProps) => {
         value={commentValue}
         name="text"
         onChange={(e) => setCommentValue(e.target.value)}
-        //   onFocus={(e) => focusHandler(e)}
         fullWidth
         multiline
         minRows={2}

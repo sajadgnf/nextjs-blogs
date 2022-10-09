@@ -33,6 +33,7 @@ const useStyle = makeStyles((theme: Theme) => {
 
         "&:hover": {
           backgroundColor: theme.palette.secondary.light,
+          color: theme.palette.secondary.main,
         },
 
         "&:focus": {
