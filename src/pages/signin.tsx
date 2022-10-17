@@ -8,6 +8,9 @@ import * as Yup from "yup";
 import React from "react";
 import Link from "next/link";
 import { ValuesProps } from "./signup";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 let initialValues = {
   email: "",
@@ -15,12 +18,18 @@ let initialValues = {
 };
 
 const RegisterForm = () => {
-  const onSubmit = (values: ValuesProps) => {
-    console.log(values);
-  };
+  const router = useRouter();
 
-  const validate = (values: ValuesProps) => {
-    console.log(values);
+  const onSubmit = (values: ValuesProps) => {
+    axios
+      .post(`${process.env.BACKEND_URL}/api/user/signin`, values, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        toast.success("با موفقیت وارد شدید");
+        router.push("/");
+      })
+      .catch((err) => toast.error(err.response.data.message));
   };
 
   const validationSchema = Yup.object({
@@ -38,7 +47,6 @@ const RegisterForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
     validationSchema,
     validateOnMount: true,
   });
@@ -61,7 +69,7 @@ const RegisterForm = () => {
             ثبت نام
           </Typography>
 
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Input label="ایمیل" name="email" type="email" formik={formik} />
             <Input
               label="رمز عبور"
@@ -82,6 +90,7 @@ const RegisterForm = () => {
             </Box>
 
             <Button
+              type="submit"
               variant="contained"
               fullWidth
               disabled={!formik.isValid}

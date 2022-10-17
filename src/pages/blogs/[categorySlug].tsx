@@ -54,10 +54,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
 
   const { data: result } = await axios.get(
-    `http://localhost:5000/api/posts?${queryString.stringify(query)}`
+    `${process.env.BACKEND_URL}/api/posts?${queryString.stringify(query)}`
   );
   const { data: postCategories } = await axios.get(
-    "http://localhost:5000/api/post-category"
+    `${process.env.BACKEND_URL}/api/post-category`
   );
 
   return {

@@ -101,10 +101,10 @@ export default Blogs;
 
 export async function getServerSideProps() {
   const { data: result } = await axios.get(
-    "http://localhost:5000/api/posts?page=1&limit=10"
+    `${process.env.BACKEND_URL}/api/posts?page=1&limit=10`
   );
   const { data: postCategories } = await axios.get(
-    "http://localhost:5000/api/post-category"
+    `${process.env.BACKEND_URL}/api/post-category`
   );
 
   return {

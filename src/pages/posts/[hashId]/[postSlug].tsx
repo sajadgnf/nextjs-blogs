@@ -285,7 +285,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const {
     data: { data },
-  } = await axios.get(`http://localhost:5000/api/posts/${query.postSlug}`);
+  } = await axios.get(`${process.env.BACKEND_URL}/api/posts/${query.postSlug}`);
 
   return {
     props: {
