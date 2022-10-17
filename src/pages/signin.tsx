@@ -8,12 +8,10 @@ import * as Yup from "yup";
 import React from "react";
 import Link from "next/link";
 import { ValuesProps } from "./signup";
-import ReCAPTCHA from "react-google-recaptcha";
 
 let initialValues = {
   email: "",
   password: "",
-  recaptcha: "",
 };
 
 const RegisterForm = () => {
@@ -26,26 +24,15 @@ const RegisterForm = () => {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .required("Name is required")
-      .min(6, "Name length is not valid"),
     email: Yup.string()
-      .email("Invalid Email format")
-      .required("Email is required"),
-    phoneNumber: Yup.string()
-      .required("Phone number is required")
-      .matches(/^[0-9]{11}$/, "Invalid Phone Number")
-      .nullable(),
+      .email("لطفا ایمیل خود را به صورت صحیح وارد کنید")
+      .required("لطفا ایمیل خود را وارد کنید"),
     password: Yup.string()
-      .required("Password is required")
+      .required("لطفا رمز خود را وارد کنید")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase and One Number"
+        "رمز باید شامل 8 کارکتر و حداقل یک حروف بزرگ ،یک حروف کوچک و یک عدد باشد"
       ),
-    confirmPassword: Yup.string()
-      .required("Confirm Password is required")
-      .oneOf([Yup.ref("password"), null], "Passwords must match"),
-    recaptcha: Yup.string().required(),
   });
 
   const formik = useFormik({
@@ -81,11 +68,6 @@ const RegisterForm = () => {
               name="password"
               type="password"
               formik={formik}
-            />
-
-            <ReCAPTCHA
-              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-              onChange={formik.handleChange("recaptcha")}
             />
 
             <Box mt={3}>

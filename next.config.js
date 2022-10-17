@@ -7,6 +7,7 @@ const nextConfig = {
   },
   env: {
     DOMAIN_URL: process.env.DOMAIN_URL,
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
   },
 };
 
