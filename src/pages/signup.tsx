@@ -7,6 +7,9 @@ import Head from "next/head";
 import * as Yup from "yup";
 import React from "react";
 import Link from "next/link";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export type ValuesProps = {
   name?: string;
@@ -25,12 +28,16 @@ let initialValues = {
 };
 
 const RegisterForm = () => {
-  const onSubmit = (values: ValuesProps) => {
-    console.log(values);
-  };
+  const router = useRouter();
 
-  const validate = (values: ValuesProps) => {
-    console.log(values);
+  const onSubmit = (values: ValuesProps) => {
+    axios
+      .post(`${process.env.BACKEND_URL}/api/user/signup`, values)
+      .then((res) => {
+        toast.success("ثبت نام شما با موفقیت انجام شد");
+        router.push("/");
+      })
+      .catch((err) => console.log(err));
   };
 
   const validationSchema = Yup.object({
@@ -58,7 +65,6 @@ const RegisterForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate,
     validationSchema,
     validateOnMount: true,
   });
@@ -81,7 +87,7 @@ const RegisterForm = () => {
             ثبت نام
           </Typography>
 
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <Input label="نام و نام خانوادگی" name="name" formik={formik} />
             <Input label="ایمیل" name="email" type="email" formik={formik} />
             <Input label="شماره موبایل" name="phoneNumber" formik={formik} />
@@ -110,6 +116,7 @@ const RegisterForm = () => {
             </Box>
 
             <Button
+              type="submit"
               variant="contained"
               fullWidth
               disabled={!formik.isValid}

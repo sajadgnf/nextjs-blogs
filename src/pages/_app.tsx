@@ -7,6 +7,7 @@ import { CacheProvider } from "@emotion/react";
 import theme from "@/mui/theme";
 import createEmotionCache from "../createEmotionCache";
 import "styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -22,6 +23,7 @@ export default function MyApp(props: any) {
         <CssBaseline />
         <Component {...pageProps} />
       </ThemeProvider>
+      <Toaster />
     </CacheProvider>
   );
 }
