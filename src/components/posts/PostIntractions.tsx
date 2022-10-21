@@ -113,7 +113,7 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
               },
         ]}
       >
-        {post.isBookMarked ? (
+        {post.isBookmarked ? (
           <BsFillBookmarkFill
             className="fillBookmarkIcon"
             style={bookmarkIconSize()}

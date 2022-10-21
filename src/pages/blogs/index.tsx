@@ -42,7 +42,7 @@ export interface BlogProps {
   likesCount: number;
   commentsCount: number;
   isLiked: Boolean;
-  isBookMarked: Boolean;
+  isBookmarked: Boolean;
   related: object;
   comments: any;
 
@@ -102,7 +102,14 @@ export default Blogs;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { data: result } = await axios.get(
-    `${process.env.BACKEND_URL}/api/posts?page=1&limit=10`);
+    `${process.env.BACKEND_URL}/api/posts?page=1&limit=10`,
+    {
+      withCredentials: true,
+      headers: {
+        cookie: req.headers.cookie || "",
+      },
+    }
+  );
   const { data: postCategories } = await axios.get(
     `${process.env.BACKEND_URL}/api/post-category`
   );

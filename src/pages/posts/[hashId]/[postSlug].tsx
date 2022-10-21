@@ -281,11 +281,19 @@ const PostPage = ({ post }: { post: BlogProps }) => {
 export default PostPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { query } = context;
+  const { query, req } = context;
 
   const {
     data: { data },
-  } = await axios.get(`${process.env.BACKEND_URL}/api/posts/${query.postSlug}`);
+  } = await axios.get(
+    `${process.env.BACKEND_URL}/api/posts/${query.postSlug}`,
+    {
+      withCredentials: true,
+      headers: {
+        cookie: req.headers.cookie || "",
+      },
+    }
+  );
 
   return {
     props: {
