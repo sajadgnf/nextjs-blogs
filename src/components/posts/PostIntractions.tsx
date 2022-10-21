@@ -10,6 +10,7 @@ import {
 import { BlogProps } from "src/pages/blogs";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import http from "@/services/httpService";
+import { useRouter } from "next/router";
 
 type InteractionProps = {
   post: BlogProps;
@@ -17,10 +18,30 @@ type InteractionProps = {
 };
 
 const PostInteractions = ({ post, isSmall }: InteractionProps) => {
+  const router = useRouter();
+
   const bookmarkIconSize = () =>
     isSmall ? { fontSize: 14 } : { fontSize: 18 };
 
   const customIconSize = () => (isSmall ? { fontSize: 14 } : { fontSize: 16 });
+
+  const likeHandler = (id: string) => {
+    http
+      .put(`/posts/like/${id}`)
+      .then((res) => {
+        router.push(router);
+      })
+      .catch((err) => {});
+  };
+
+  const bookmarkHandler = (id: string) => {
+    http
+      .put(`/posts/bookmark/${id}`)
+      .then((res) => {
+        router.push(router);
+      })
+      .catch((err) => {});
+  };
 
   return (
     <Stack direction="row" alignItems="center">
@@ -54,9 +75,7 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
 
       {/* like */}
       <Button
-        onClick={() => {
-          http.put(`/posts/like/${post._id}`);
-        }}
+        onClick={() => likeHandler(post._id)}
         sx={[
           {
             py: 0.2,
@@ -73,6 +92,9 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
                 "&:hover": {
                   bgcolor: "customRed.main",
                   color: "#fff",
+                  "& svg": {
+                    color: "#fff",
+                  },
                 },
               }
             : {
@@ -94,6 +116,7 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
 
       {/* bookmark */}
       <Button
+        onClick={() => bookmarkHandler(post._id)}
         sx={[
           {
             px: 0.6,
@@ -108,6 +131,9 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
                 "&:hover": {
                   bgcolor: "primary.main",
                   color: "#fff",
+                  "& svg": {
+                    color: "#fff",
+                  },
                 },
               }
             : {

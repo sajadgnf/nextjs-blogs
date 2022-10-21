@@ -5,10 +5,6 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  env: {
-    DOMAIN_URL: process.env.DOMAIN_URL,
-    BACKEND_URL: process.env.BACKEND_URL,
-  },
 };
 
 module.exports = nextConfig
