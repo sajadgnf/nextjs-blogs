@@ -7,6 +7,7 @@ import Sortbar from "@/components/posts/Sortbar";
 import { GetServerSideProps } from "next";
 import queryString from "query-string";
 import Layout from "@/containers/layout";
+import http from "@/services/httpService";
 
 function CategoryPage({ blogsData, postCategories }: any) {
   return (
@@ -53,10 +54,9 @@ export default CategoryPage;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query, req } = context;
 
-  const { data: result } = await axios.get(
-    `${process.env.BACKEND_URL}/api/posts?${queryString.stringify(query)}`,
+  const { data: result } = await http.get(
+    `/posts?${queryString.stringify(query)}`,
     {
-      withCredentials: true,
       headers: {
         cookie: req.headers.cookie || "",
       },

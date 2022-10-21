@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import { BlogProps } from "src/pages/blogs";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import http from "@/services/httpService";
 
 type InteractionProps = {
   post: BlogProps;
@@ -53,6 +54,9 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
 
       {/* like */}
       <Button
+        onClick={() => {
+          http.put(`/posts/like/${post._id}`);
+        }}
         sx={[
           {
             py: 0.2,
