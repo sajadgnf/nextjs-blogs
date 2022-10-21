@@ -8,6 +8,7 @@ import theme from "@/mui/theme";
 import createEmotionCache from "../createEmotionCache";
 import "styles/globals.css";
 import { Toaster } from "react-hot-toast";
+import AuthProvider from "@/context/AuthContext";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -16,14 +17,16 @@ export default function MyApp(props: any) {
 
   return (
     <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-      <Toaster />
+      <AuthProvider>
+        <Head>
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+        <Toaster />
+      </AuthProvider>
     </CacheProvider>
   );
 }
