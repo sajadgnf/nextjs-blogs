@@ -9,7 +9,7 @@ type ActionType = { type: string; payload: object; error?: string };
 const AuthContext = createContext<any | null>(null);
 const AuthContextDispatcher = createContext<any | null>(null);
 
-const initialState = { user: null, loading: false, error: null };
+const initialState = { user: null, loading: true, error: null };
 
 const reducer = (state = initialState, action: ActionType) => {
   switch (action.type) {
@@ -57,7 +57,7 @@ const asyncActionHandlers: any = {
           Router.push("/");
         })
         .catch((err) => {
-          dispatch({ type: "SIGN_REJECT", error: err.response.data.message });
+          dispatch({ type: "SIGNIN_REJECT", error: err.response.data.message });
           toast.error(err.response.data.message);
         });
     },
@@ -72,7 +72,7 @@ const asyncActionHandlers: any = {
         .then(({ data }) => {
           dispatch({ type: "SIGNIN_SUCCESS", payload: data });
         })
-        .catch();
+        .catch((err) => dispatch({ type: "SIGNIN_REJECT", error: err }));
     },
   SIGNOUT:
     ({ dispatch }: any) =>

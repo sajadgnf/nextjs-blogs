@@ -14,7 +14,7 @@ const useStyle = makeStyles({
 
 const Header = () => {
   const classes = useStyle();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const dispatch = useAuthAction();
 
   return (
@@ -28,7 +28,7 @@ const Header = () => {
         boxShadow: "rgb(0 0 0 / 10%) 0px 2px 5px",
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={loading ? { opacity: 0 } : { opacity: 100 }}>
         <Toolbar>
           <Box display="flex" alignItems="center" flexGrow={1}>
             <Link href={"/blogs"}>
