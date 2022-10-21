@@ -5,10 +5,9 @@ import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import Head from "next/head";
 import * as Yup from "yup";
-import React from "react";
+import React,{useEffect} from "react";
 import Link from "next/link";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { useAuth, useAuthAction } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 
 export type ValuesProps = {
@@ -28,16 +27,16 @@ let initialValues = {
 };
 
 const RegisterForm = () => {
+  const dispatch = useAuthAction();
+  const { user, loading } = useAuth();
   const router = useRouter();
 
   const onSubmit = (values: ValuesProps) => {
-    axios
-      .post(`${process.env.BACKEND_URL}/api/user/signup`, values)
-      .then((res) => {
-        toast.success("ثبت نام شما با موفقیت انجام شد");
-        router.push("/");
-      })
-      .catch((err) => console.log(err));
+    const { name, email, phoneNumber, password } = values;
+    dispatch({
+      type: "SIGNUP",
+      payload: { name, email, phoneNumber, password },
+    });
   };
 
   const validationSchema = Yup.object({
@@ -68,6 +67,10 @@ const RegisterForm = () => {
     validationSchema,
     validateOnMount: true,
   });
+
+  useEffect(() => {
+    if (user) router.push("/");
+  }, [user]);
 
   return (
     <Layout>
