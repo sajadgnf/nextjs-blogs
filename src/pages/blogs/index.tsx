@@ -5,6 +5,7 @@ import PostList from "@/components/posts/PostList";
 import Categories from "@/components/posts/Categories";
 import Sortbar from "@/components/posts/Sortbar";
 import Layout from "@/containers/layout";
+import { GetServerSideProps } from "next";
 
 export interface Theme {
   palette: {
@@ -99,10 +100,9 @@ function Blogs({ blogsData, postCategories }: any) {
 
 export default Blogs;
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const { data: result } = await axios.get(
-    `${process.env.BACKEND_URL}/api/posts?page=1&limit=10`
-  );
+    `${process.env.BACKEND_URL}/api/posts?page=1&limit=10`);
   const { data: postCategories } = await axios.get(
     `${process.env.BACKEND_URL}/api/post-category`
   );
@@ -113,4 +113,4 @@ export async function getServerSideProps() {
       postCategories: postCategories.data,
     },
   };
-}
+};
