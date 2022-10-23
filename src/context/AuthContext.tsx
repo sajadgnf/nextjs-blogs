@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useReducerAsync } from "use-reducer-async";
 import React, { createContext, useContext, useEffect } from "react";
 import Router from "next/router";
+import http from "@/services/httpService";
 
 type ActionType = { type: string; payload: object; error?: string };
 
@@ -29,12 +30,10 @@ const asyncActionHandlers: any = {
     ({ dispatch }: any) =>
     (action: any) => {
       dispatch({ type: "SIGNIN_PENDING" });
-      axios
-        .post(`${process.env.BACKEND_URL}/api/user/signin`, action.payload, {
-          withCredentials: true,
-        })
+      http
+        .post(`/user/signin`, action.payload)
         .then(({ data }) => {
-          toast.success(`${data.name} خوش آمدید`);
+          toast.success(`${data.name} خوش آمدید!`);
           dispatch({ type: "SIGNIN_SUCCESS", payload: { data } });
           Router.push("/");
         })
@@ -47,10 +46,8 @@ const asyncActionHandlers: any = {
     ({ dispatch }: any) =>
     (action: any) => {
       dispatch({ type: "SIGNIN_PENDING" });
-      axios
-        .post(`${process.env.BACKEND_URL}/api/user/signup`, action.payload, {
-          withCredentials: true,
-        })
+      http
+        .post(`/user/signup`, action.payload)
         .then(({ data }) => {
           toast.success("ثبت نام شما با موفقیت انجام شد");
           dispatch({ type: "SIGNIN_SUCCESS", payload: data });
@@ -65,10 +62,8 @@ const asyncActionHandlers: any = {
     ({ dispatch }: any) =>
     (action: any) => {
       dispatch({ type: "SIGNIN_PENDING" });
-      axios
-        .get(`${process.env.BACKEND_URL}/api/user/load`, {
-          withCredentials: true,
-        })
+      http
+        .get(`/user/load`)
         .then(({ data }) => {
           dispatch({ type: "SIGNIN_SUCCESS", payload: data });
         })
@@ -77,10 +72,8 @@ const asyncActionHandlers: any = {
   SIGNOUT:
     ({ dispatch }: any) =>
     (action: any) => {
-      axios
-        .get(`${process.env.BACKEND_URL}/api/user/logout`, {
-          withCredentials: true,
-        })
+      http
+        .get(`/user/logout`)
         .then(({ data }) => {
           window.location.href = "./";
         })

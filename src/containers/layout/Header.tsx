@@ -28,7 +28,13 @@ const Header = () => {
         boxShadow: "rgb(0 0 0 / 10%) 0px 2px 5px",
       }}
     >
-      <Container maxWidth="lg" sx={loading ? { opacity: 0 } : { opacity: 100 }}>
+      <Container
+        maxWidth="lg"
+        sx={[
+          { transition: "all,ease, .2s" },
+          loading ? { opacity: 0 } : { opacity: 100 },
+        ]}
+      >
         <Toolbar>
           <Box display="flex" alignItems="center" flexGrow={1}>
             <Link href={"/blogs"}>

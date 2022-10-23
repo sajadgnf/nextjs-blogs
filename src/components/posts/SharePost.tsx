@@ -42,19 +42,19 @@ const SharePost = ({ post }: { post: BlogProps }) => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <a
           className={classes.shareLink}
-          href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
         >
           <LinkedInIcon className={classes.customizedIcon} />
         </a>
         <a
           className={classes.shareLink}
-          href={`https://twitter.com/share?text=${post.title}&url=${process.env.DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
+          href={`https://twitter.com/share?text=${post.title}&url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
         >
           <TwitterIcon className={classes.customizedIcon} />
         </a>
         <a
           className={classes.shareLink}
-          href={`https://telegram.me/share?url=${process.env.DOMAIN_URL}/posts/${post.hashId}/${post.slug}&text=${post.title}`}
+          href={`https://telegram.me/share?url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}&text=${post.title}`}
         >
           <TelegramIcon className={classes.customizedIcon} />
         </a>
@@ -62,7 +62,7 @@ const SharePost = ({ post }: { post: BlogProps }) => {
 
       {/* copy to clipboard */}
       <CopyToClipboard
-        text={`${process.env.DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
+        text={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/posts/${post.hashId}/${post.slug}`}
         onCopy={copyHandler}
       >
         <Box

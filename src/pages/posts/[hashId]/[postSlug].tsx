@@ -18,6 +18,7 @@ import SharePost from "@/components/posts/SharePost";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import toLocalDate from "@/utils/toLocalDate";
 import Layout from "@/containers/layout";
+import http from "@/services/httpService";
 
 const useStyle = makeStyles((theme: Theme) => {
   return {
@@ -281,11 +282,15 @@ const PostPage = ({ post }: { post: BlogProps }) => {
 export default PostPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { query } = context;
+  const { query, req } = context;
 
   const {
     data: { data },
-  } = await axios.get(`${process.env.BACKEND_URL}/api/posts/${query.postSlug}`);
+  } = await http.get(`/posts/${query.postSlug}`, {
+    headers: {
+      cookie: req.headers.cookie || "",
+    },
+  });
 
   return {
     props: {

@@ -6,6 +6,7 @@ import Categories from "@/components/posts/Categories";
 import Sortbar from "@/components/posts/Sortbar";
 import Layout from "@/containers/layout";
 import { GetServerSideProps } from "next";
+import http from "@/services/httpService";
 
 export interface Theme {
   palette: {
@@ -42,7 +43,7 @@ export interface BlogProps {
   likesCount: number;
   commentsCount: number;
   isLiked: Boolean;
-  isBookMarked: Boolean;
+  isBookmarked: Boolean;
   related: object;
   comments: any;
 
@@ -101,11 +102,12 @@ function Blogs({ blogsData, postCategories }: any) {
 export default Blogs;
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { data: result } = await axios.get(
-    `${process.env.BACKEND_URL}/api/posts?page=1&limit=10`);
-  const { data: postCategories } = await axios.get(
-    `${process.env.BACKEND_URL}/api/post-category`
-  );
+  const { data: result } = await http.get(`/posts?page=1&limit=10`, {
+    headers: {
+      cookie: req.headers.cookie || "",
+    },
+  });
+  const { data: postCategories } = await http.get(`/post-category`);
 
   return {
     props: {

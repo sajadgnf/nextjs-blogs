@@ -41,6 +41,9 @@
       "@/mui/*": [
         "src/mui/*"
       ],
+      "@/services/*": [
+        "src/services/*"
+      ],
     }
   },
   "include": [
