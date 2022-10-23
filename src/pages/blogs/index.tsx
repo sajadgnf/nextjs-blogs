@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from "@mui/material";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import PostList from "@/components/posts/PostList";
 import Categories from "@/components/posts/Categories";
 import Sortbar from "@/components/posts/Sortbar";
@@ -7,6 +7,10 @@ import Layout from "@/containers/layout";
 import { GetServerSideProps } from "next";
 import http from "@/services/httpService";
 import queryString from "query-string";
+import { useRouter } from "next/router";
+import routerPush from "@/utils/routerPush";
+import Pagination from "@/common/Pagination";
+import PaginationComponent from "@/common/Pagination";
 
 export interface Theme {
   palette: {
@@ -90,8 +94,14 @@ function Blogs({ blogsData, postCategories }: any) {
 
             {/* blogs section */}
             <Grid container spacing={3}>
-              <PostList blogsData={blogsData} />
+              <PostList blogsData={blogsData.docs} />
             </Grid>
+            <Box mt={10} justifyContent="center" display="flex">
+              <PaginationComponent
+                totalPages={blogsData.totalPages}
+                page={blogsData.page}
+              />
+            </Box>
           </Grid>
         </Grid>
       </Container>
@@ -117,7 +127,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      blogsData: result.data.docs,
+      blogsData: result.data,
       postCategories: postCategories.data,
     },
   };

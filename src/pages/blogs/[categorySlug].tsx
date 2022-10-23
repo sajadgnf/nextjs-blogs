@@ -8,6 +8,7 @@ import { GetServerSideProps } from "next";
 import queryString from "query-string";
 import Layout from "@/containers/layout";
 import http from "@/services/httpService";
+import PaginationComponent from "@/common/Pagination";
 
 function CategoryPage({ blogsData, postCategories }: any) {
   return (
@@ -42,6 +43,13 @@ function CategoryPage({ blogsData, postCategories }: any) {
             <Grid container spacing={3}>
               <PostList blogsData={blogsData} />
             </Grid>
+
+            <Box mt={10} justifyContent="center" display="flex">
+              <PaginationComponent
+                totalPages={blogsData.totalPages}
+                page={blogsData.page}
+              />
+            </Box>
           </Grid>
         </Grid>
       </Container>
