@@ -33,7 +33,7 @@ const asyncActionHandlers: any = {
       http
         .post(`/user/signin`, action.payload)
         .then(({ data }) => {
-          toast.success(`${data.name} خوش آمدید`);
+          toast.success(`${data.name} خوش آمدید!`);
           dispatch({ type: "SIGNIN_SUCCESS", payload: { data } });
           Router.push("/");
         })

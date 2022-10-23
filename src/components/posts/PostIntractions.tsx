@@ -11,6 +11,8 @@ import { BlogProps } from "src/pages/blogs";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import http from "@/services/httpService";
 import { useRouter } from "next/router";
+import routerPush from "@/utils/routerPush";
+import toast from "react-hot-toast";
 
 type InteractionProps = {
   post: BlogProps;
@@ -28,19 +30,21 @@ const PostInteractions = ({ post, isSmall }: InteractionProps) => {
   const likeHandler = (id: string) => {
     http
       .put(`/posts/like/${id}`)
-      .then((res) => {
-        router.push(router);
+      .then(({ data }) => {
+        toast.success(data.message);
+        routerPush(router);
       })
-      .catch((err) => {});
+      .catch((err) => toast.error(err?.response?.data?.message));
   };
 
   const bookmarkHandler = (id: string) => {
     http
       .put(`/posts/bookmark/${id}`)
-      .then((res) => {
-        router.push(router);
+      .then(({ data }) => {
+        toast.success(data.message);
+        routerPush(router);
       })
-      .catch((err) => {});
+      .catch((err) => toast.error(err?.response?.data?.message));
   };
 
   return (

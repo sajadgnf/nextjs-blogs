@@ -62,9 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     }
   );
-  const { data: postCategories } = await axios.get(
-    `${process.env.BACKEND_URL}/api/post-category`
-  );
+  const { data: postCategories } = await http.get(`/post-category`);
 
   return {
     props: {
