@@ -8,11 +8,12 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 import { RiListUnordered } from "react-icons/ri";
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles } from "@mui/styles";
 import { Theme } from "src/pages/blogs";
+import { useRouter } from "next/router";
+import routerPush from "@/utils/routerPush";
 
 const useStyle = makeStyles((theme: Theme) => {
   return {
@@ -20,9 +21,6 @@ const useStyle = makeStyles((theme: Theme) => {
       cursor: "pointer",
       padding: "16px 0",
       transition: "all ease .2s",
-      "&:hover": {
-        borderBottom: `3px solid ${theme.palette.secondary.main}`,
-      },
     },
 
     filterTitle: {
@@ -60,14 +58,6 @@ const useStyle = makeStyles((theme: Theme) => {
       transition: "all ease .2s",
       borderRadius: 5,
 
-      "&:focus": {
-        borderRight: `5px solid ${theme.palette.secondary.main}`,
-      },
-
-      "&:focus p": {
-        color: theme.palette.secondary.main,
-      },
-
       "& p": {
         margin: "auto",
       },
@@ -76,8 +66,22 @@ const useStyle = makeStyles((theme: Theme) => {
 });
 
 const Sortbar = () => {
+  const router = useRouter();
   const classes = useStyle();
   const [isOpen, setIsOpen] = useState(false);
+  const [sort, setSort] = useState(router.query.sort || "newest");
+
+  const sortOptions = [
+    { label: "جدید ترین", id: "newest" },
+    { label: "پربازدید ترین", id: "most" },
+    { label: "محبوب ترین", id: "popular" },
+  ];
+
+  const sortHandler = (id: string) => {
+    setSort(id);
+    router.query.sort = id;
+    routerPush(router);
+  };
 
   return (
     <>
@@ -89,15 +93,36 @@ const Sortbar = () => {
       </Box>
 
       <Box display={{ xs: "none", md: "flex" }}>
-        <Typography ml={4} className={classes.filterItem}>
-          جدید ترین
-        </Typography>
-        <Typography ml={4} className={classes.filterItem}>
-          پر بازدید ترین
-        </Typography>
-        <Typography ml={4} className={classes.filterItem}>
-          محبوب ترین
-        </Typography>
+        {sortOptions.map(({ label, id }) => (
+          <Typography
+            key={id}
+            ml={4}
+            position="relative"
+            sx={[
+              id === sort && {
+                color: "secondary.main",
+              },
+            ]}
+            className={classes.filterItem}
+            onClick={() => sortHandler(id)}
+          >
+            {label}
+            {id === sort && (
+              <Typography
+                component="span"
+                width={38}
+                height={3}
+                position="absolute"
+                bottom={0}
+                right={0}
+                sx={{
+                  backgroundColor: "secondary.main",
+                  transition: "all ease .2s",
+                }}
+              ></Typography>
+            )}
+          </Typography>
+        ))}
       </Box>
 
       {/* filters drawer */}
@@ -135,23 +160,24 @@ const Sortbar = () => {
             />
           </Box>
           <List>
-            <ListItem disablePadding>
-              <ListItemButton className={classes.drawerFilterItem}>
-                <Typography> جدید ترین</Typography>
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem disablePadding>
-              <ListItemButton className={classes.drawerFilterItem}>
-                <Typography>پر بازدید ترین</Typography>
-              </ListItemButton>
-            </ListItem>
-
-            <ListItem disablePadding>
-              <ListItemButton className={classes.drawerFilterItem}>
-                <Typography>محبوب ترین</Typography>
-              </ListItemButton>
-            </ListItem>
+            {sortOptions.map(({ label, id }) => (
+              <ListItem disablePadding key={id}>
+                <ListItemButton
+                  sx={[
+                    id === sort && {
+                      borderRight: `5px solid`,
+                      borderRightColor: "secondary.main",
+                    },
+                  ]}
+                  className={classes.drawerFilterItem}
+                  onClick={() => sortHandler(id)}
+                >
+                  <Typography color={id === sort ? "secondary" : ""}>
+                    {label}
+                  </Typography>
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
         </Drawer>
       </Modal>

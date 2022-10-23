@@ -1,12 +1,12 @@
 import { Box, Container, Grid } from "@mui/material";
 import React from "react";
-import axios from "axios";
 import PostList from "@/components/posts/PostList";
 import Categories from "@/components/posts/Categories";
 import Sortbar from "@/components/posts/Sortbar";
 import Layout from "@/containers/layout";
 import { GetServerSideProps } from "next";
 import http from "@/services/httpService";
+import queryString from "query-string";
 
 export interface Theme {
   palette: {
@@ -101,12 +101,18 @@ function Blogs({ blogsData, postCategories }: any) {
 
 export default Blogs;
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const { data: result } = await http.get(`/posts?page=1&limit=10`, {
-    headers: {
-      cookie: req.headers.cookie || "",
-    },
-  });
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  query,
+}) => {
+  const { data: result } = await http.get(
+    `/posts?${queryString.stringify(query)}`,
+    {
+      headers: {
+        cookie: req.headers.cookie || "",
+      },
+    }
+  );
   const { data: postCategories } = await http.get(`/post-category`);
 
   return {
