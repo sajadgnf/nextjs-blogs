@@ -17,12 +17,6 @@ import routerPush from "@/utils/routerPush";
 
 const useStyle = makeStyles((theme: Theme) => {
   return {
-    filterItem: {
-      cursor: "pointer",
-      padding: "16px 0",
-      transition: "all ease .2s",
-    },
-
     filterTitle: {
       border: "1px solid silver",
       borderRadius: 50,
@@ -34,12 +28,14 @@ const useStyle = makeStyles((theme: Theme) => {
       alignItems: "center",
       padding: "5px 0",
       marginTop: 20,
+      pointerEvents: "all",
 
       "& span": {
         display: "none",
       },
 
       [theme.breakpoints.up("md")]: {
+        pointerEvents: "none",
         border: 0,
         borderRadius: 0,
         width: "unset",
@@ -51,6 +47,12 @@ const useStyle = makeStyles((theme: Theme) => {
           display: "inline-block",
         },
       },
+    },
+
+    filterItem: {
+      cursor: "pointer",
+      padding: "16px 0",
+      transition: "all ease .2s",
     },
 
     drawerFilterItem: {
@@ -115,6 +117,7 @@ const Sortbar = () => {
                 position="absolute"
                 bottom={0}
                 right={0}
+                borderRadius={100}
                 sx={{
                   backgroundColor: "secondary.main",
                   transition: "all ease .2s",

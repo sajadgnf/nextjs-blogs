@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { BlogProps, Theme } from "src/pages/blogs";
 import { makeStyles } from "@mui/styles";
+import { useRouter } from "next/router";
 
 const useStyle = makeStyles((theme: Theme) => {
   return {
@@ -21,11 +22,6 @@ const useStyle = makeStyles((theme: Theme) => {
       marginLeft: 20,
       whiteSpace: "nowrap",
 
-      "&:focus": {
-        backgroundColor: theme.palette.secondary.light,
-        color: theme.palette.secondary.main,
-      },
-
       [theme.breakpoints.up("md")]: {
         border: 0,
         borderRadius: 0,
@@ -35,11 +31,16 @@ const useStyle = makeStyles((theme: Theme) => {
           backgroundColor: theme.palette.secondary.light,
           color: theme.palette.secondary.main,
         },
+      },
+    },
 
-        "&:focus": {
-          backgroundColor: theme.palette.secondary.main,
-          color: "#fff",
-        },
+    currentCategory: {
+      pointerEvents:"none",
+      backgroundColor: theme.palette.secondary.light,
+      color: theme.palette.secondary.main,
+      [theme.breakpoints.up("md")]: {
+        backgroundColor: theme.palette.secondary.main,
+        color: "#fff",
       },
     },
 
@@ -51,6 +52,7 @@ const useStyle = makeStyles((theme: Theme) => {
 });
 
 const Categories = ({ postCategories }: any) => {
+  const { query } = useRouter();
   const classes = useStyle();
 
   const [isOpen, setIsOpen] = useState(true);
@@ -92,11 +94,29 @@ const Categories = ({ postCategories }: any) => {
         sx={isOpen ? { display: "flex" } : { display: "none" }}
       >
         <Link href={"/blogs"}>
-          <a className={classes.sideBarLink}>همه پست ها</a>
+          <a
+            className={`
+                ${classes.sideBarLink}
+                ${!query.categorySlug ? classes.currentCategory : ""}
+              `}
+          >
+            همه مقالات
+          </a>
         </Link>
         {postCategories.map((category: BlogProps["category"]) => (
           <Link href={`/blogs/${category.englishTitle}`} key={category._id}>
-            <a className={classes.sideBarLink}>{category.title}</a>
+            <a
+              className={`
+                ${classes.sideBarLink}
+                ${
+                  query.categorySlug === category.englishTitle
+                    ? classes.currentCategory
+                    : ""
+                }
+              `}
+            >
+              {category.title}
+            </a>
           </Link>
         ))}
       </Box>
