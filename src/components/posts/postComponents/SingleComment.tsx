@@ -4,11 +4,16 @@ import { CommentProps } from "./index";
 import toLocalDate from "@/utils/toLocalDate";
 import CommentForm from "./CommentForm";
 
-const SingleComment = ({ comment }: { comment: CommentProps }) => {
-  const [replyTo, setReplyTo] = useState(false);
-  const [commentValue, setCommentValue] = useState("");
+type SingleCommentProps = {
+  comment: CommentProps;
+  postId: string;
+};
 
-  const { writer, createdAt, content } = comment;
+const SingleComment = ({ comment, postId }: SingleCommentProps) => {
+  const [replyTo, setReplyTo] = useState(false);
+
+  const { writer, createdAt, content, _id } = comment;
+
   return (
     <Box borderRadius={5} border="1px solid #e0e0e0" p={2}>
       {/* writer */}
@@ -33,15 +38,12 @@ const SingleComment = ({ comment }: { comment: CommentProps }) => {
 
       {/* response form */}
       {replyTo && (
-        <form>
+        <>
           <Typography fontSize={12} mb={2}>
             در حال پاسخ به {writer.name}
           </Typography>
-          <CommentForm
-            commentValue={commentValue}
-            setCommentValue={setCommentValue}
-          />
-        </form>
+          <CommentForm postId={postId} responseTo={_id} setReplyTo={setReplyTo} />
+        </>
       )}
     </Box>
   );

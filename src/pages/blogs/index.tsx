@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from "@mui/material";
-import React, { ChangeEvent } from "react";
+import React from "react";
 import PostList from "@/components/posts/PostList";
 import Categories from "@/components/posts/Categories";
 import Sortbar from "@/components/posts/Sortbar";
@@ -7,9 +7,6 @@ import Layout from "@/containers/layout";
 import { GetServerSideProps } from "next";
 import http from "@/services/httpService";
 import queryString from "query-string";
-import { useRouter } from "next/router";
-import routerPush from "@/utils/routerPush";
-import Pagination from "@/common/Pagination";
 import PaginationComponent from "@/common/Pagination";
 
 export interface Theme {

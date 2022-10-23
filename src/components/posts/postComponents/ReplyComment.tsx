@@ -6,19 +6,21 @@ import Box from "@mui/material/Box";
 type Props = {
   comments: [CommentProps];
   parentsCommentId: number;
+  postId: string;
 };
 
-const ReplyComment = ({ comments, parentsCommentId }: Props) => {
+const ReplyComment = ({ comments, parentsCommentId, postId }: Props) => {
   return (
     <Box mr={3}>
       {comments.map(
         (comment: CommentProps) =>
           comment.responseTo === parentsCommentId && (
             <Box key={comment._id} mt={3}>
-              <SingleComment comment={comment} />
+              <SingleComment comment={comment} postId={postId} />
               <ReplyComment
                 comments={comments}
                 parentsCommentId={comment._id}
+                postId={postId}
               />
             </Box>
           )
