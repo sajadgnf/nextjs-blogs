@@ -9,10 +9,11 @@ import createEmotionCache from "../createEmotionCache";
 import "styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "@/context/AuthContext";
+import { wrapper } from "src/redux/store";
 
 const clientSideEmotionCache = createEmotionCache();
 
-export default function MyApp(props: any) {
+function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
@@ -36,3 +37,5 @@ MyApp.propTypes = {
   emotionCache: PropTypes.object,
   pageProps: PropTypes.object.isRequired,
 };
+
+export default wrapper.withRedux(MyApp);
