@@ -1,7 +1,8 @@
 // @ts-nocheck
 
 import { createWrapper, HYDRATE } from "next-redux-wrapper";
-import { AnyAction, createStore } from "redux";
+import { AnyAction, createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import rootReducer from "./rootReducer";
 
 const masterReducer = (state: ReturnType<typeof rootReducer>, action: AnyAction) => {
@@ -17,6 +18,6 @@ const masterReducer = (state: ReturnType<typeof rootReducer>, action: AnyAction)
     }
 }
 
-const initStore = () => createStore(masterReducer)
+const initStore = () => createStore(masterReducer, applyMiddleware(thunk))
 
 export const wrapper = createWrapper(initStore)

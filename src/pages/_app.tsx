@@ -8,7 +8,6 @@ import theme from "@/mui/theme";
 import createEmotionCache from "../createEmotionCache";
 import "styles/globals.css";
 import { Toaster } from "react-hot-toast";
-import AuthProvider from "@/context/AuthContext";
 import { wrapper } from "src/redux/store";
 
 const clientSideEmotionCache = createEmotionCache();

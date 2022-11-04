@@ -8,8 +8,10 @@ import * as Yup from "yup";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { ValuesProps } from "./signup";
-import { useAuth, useAuthAction } from "@/context/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import rootReducer from "src/redux/rootReducer";
+import { signinUser } from "src/redux/user/userActions";
 
 let initialValues = {
   email: "",
@@ -17,12 +19,15 @@ let initialValues = {
 };
 
 const RegisterForm = () => {
-  const dispatch = useAuthAction();
-  const { user, loading } = useAuth();
+  const { user } = useSelector(
+    (store: ReturnType<typeof rootReducer>) => store.signinReducer
+  );
+  const dispatch = useDispatch();
+
   const router = useRouter();
 
   const onSubmit = (values: ValuesProps) => {
-    dispatch({ type: "SIGNIN", payload: values });
+    dispatch(signinUser(values));
   };
 
   const validationSchema = Yup.object({

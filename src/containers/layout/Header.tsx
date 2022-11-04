@@ -5,6 +5,8 @@ import { Container } from "@mui/system";
 import Link from "next/link";
 import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useSelector, useDispatch } from "react-redux";
+import rootReducer from "src/redux/rootReducer";
 
 const useStyle = makeStyles({
   link: {
@@ -14,8 +16,10 @@ const useStyle = makeStyles({
 
 const Header = () => {
   const classes = useStyle();
-  const { user, loading } = useAuth();
-  const dispatch = useAuthAction();
+  const { user, loading } = useSelector(
+    (store: ReturnType<typeof rootReducer>) => store.signinReducer
+  );
+  const dispatch = useDispatch();
 
   return (
     <AppBar

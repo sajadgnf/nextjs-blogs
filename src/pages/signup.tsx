@@ -5,10 +5,12 @@ import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import Head from "next/head";
 import * as Yup from "yup";
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
-import { useAuth, useAuthAction } from "@/context/AuthContext";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import rootReducer from "src/redux/rootReducer";
+import { signupUser } from "src/redux/user/userActions";
 
 export type ValuesProps = {
   name?: string;
@@ -27,16 +29,15 @@ let initialValues = {
 };
 
 const RegisterForm = () => {
-  const dispatch = useAuthAction();
-  const { user, loading } = useAuth();
+  const { user } = useSelector(
+    (store: ReturnType<typeof rootReducer>) => store.signinReducer
+  );
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const onSubmit = (values: ValuesProps) => {
     const { name, email, phoneNumber, password } = values;
-    dispatch({
-      type: "SIGNUP",
-      payload: { name, email, phoneNumber, password },
-    });
+    dispatch(signupUser(name, email, phoneNumber, password));
   };
 
   const validationSchema = Yup.object({
