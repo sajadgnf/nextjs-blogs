@@ -1,20 +1,22 @@
-import { createWrapper, HYDRATE } from "next-redux-wrapper";
-import { createStore } from "redux";
-import rootReducer from "./rootReducer";
-import { ActionType } from "./user/userReducer";
+// @ts-nocheck
 
-const masterReducer = (state: any, action: ActionType) => {
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
+import { AnyAction, createStore } from "redux";
+import rootReducer from "./rootReducer";
+
+const masterReducer = (state: ReturnType<typeof rootReducer>, action: AnyAction) => {
     if (action.type === HYDRATE) {
         const nextState = {
             ...state,
             ...action.payload
         }
+
         return nextState
     } else {
         return rootReducer(state, action)
     }
 }
 
-const initStore = createStore(masterReducer)
+const initStore = () => createStore(masterReducer)
 
 export const wrapper = createWrapper(initStore)

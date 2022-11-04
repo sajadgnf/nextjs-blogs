@@ -1,9 +1,10 @@
+import { AnyAction } from "redux";
 import { SIGNIN_USER_FAILURE, SIGNIN_USER_REQUEST, SIGNIN_USER_SUCCESS, SIGNUP_USER_FAILURE, SIGNUP_USER_REQUEST, SIGNUP_USER_SUCCESS } from "./userTypes";
 
-export type ActionType = { type: string; payload: object; error?: string };
+// export type ActionType = { type: string; payload: object; error?: string };
 const initialState = { loading: true, user: null, error: null };
 
-export const signinUserReducer = (state = initialState, action: ActionType) => {
+export const signinUserReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case SIGNIN_USER_REQUEST:
             return { ...state, loading: true }
@@ -16,7 +17,7 @@ export const signinUserReducer = (state = initialState, action: ActionType) => {
     }
 }
 
-export const signupUserReducer = (state = initialState, action: ActionType) => {
+export const signupUserReducer = (state = initialState, action: AnyAction) => {
     switch (action.type) {
         case SIGNUP_USER_REQUEST:
             return { ...state, loading: true }
