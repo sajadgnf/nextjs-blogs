@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,11 +9,18 @@ import createEmotionCache from "../createEmotionCache";
 import "styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { wrapper } from "src/redux/store";
+import { useStore } from "react-redux";
+import { loadUserData } from "src/redux/user/userActions";
 
 const clientSideEmotionCache = createEmotionCache();
 
 function MyApp(props: any) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const store = useStore();
+
+  useEffect(() => {
+    loadUserData(store);
+  }, []);
 
   return (
     <CacheProvider value={emotionCache}>

@@ -28,6 +28,7 @@
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.4",
     "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "sanitize-html": "^2.7.2",
     "use-reducer-async": "^2.1.1",

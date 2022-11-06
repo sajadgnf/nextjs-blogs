@@ -1,4 +1,3 @@
-import { useAuth, useAuthAction } from "@/context/AuthContext";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Container } from "@mui/system";
@@ -7,6 +6,7 @@ import React from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useSelector, useDispatch } from "react-redux";
 import rootReducer from "src/redux/rootReducer";
+import { signoutUser } from "src/redux/user/userActions";
 
 const useStyle = makeStyles({
   link: {
@@ -57,10 +57,7 @@ const Header = () => {
           <Box display="flex" alignItems="center">
             {user ? (
               <>
-                <Button
-                  color="error"
-                  onClick={() => dispatch({ type: "SIGNOUT" })}
-                >
+                <Button color="error" onClick={() => dispatch(signoutUser())}>
                   خروج
                 </Button>
                 <Link href={"/"}>

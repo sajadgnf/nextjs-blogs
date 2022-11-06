@@ -37,7 +37,7 @@ const RegisterForm = () => {
 
   const onSubmit = (values: ValuesProps) => {
     const { name, email, phoneNumber, password } = values;
-    dispatch(signupUser(name, email, phoneNumber, password));
+    dispatch(signupUser({name, email, phoneNumber, password}));
   };
 
   const validationSchema = Yup.object({

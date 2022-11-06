@@ -5,6 +5,14 @@ import { AnyAction, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./rootReducer";
 
+const bindMiddleWare = (middleware) => {
+    if (process.env.NODE_ENV !== "production") {
+        const { composeWithDevTools } = require("redux-devtools-extension");
+        return composeWithDevTools(applyMiddleware(...middleware));
+    }
+    return applyMiddleware(...middleware);
+};
+
 const masterReducer = (state: ReturnType<typeof rootReducer>, action: AnyAction) => {
     if (action.type === HYDRATE) {
         const nextState = {
@@ -18,6 +26,6 @@ const masterReducer = (state: ReturnType<typeof rootReducer>, action: AnyAction)
     }
 }
 
-const initStore = () => createStore(masterReducer, applyMiddleware(thunk))
+const initStore = () => createStore(masterReducer, bindMiddleWare([thunk]))
 
 export const wrapper = createWrapper(initStore)
