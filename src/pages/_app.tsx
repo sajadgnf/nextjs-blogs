@@ -5,7 +5,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider } from "@emotion/react";
 import theme from "@/mui/theme";
-import createEmotionCache from "../createEmotionCache";
+import createEmotionCache from "../mui/createEmotionCache";
 import "styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "@/context/AuthContext";
